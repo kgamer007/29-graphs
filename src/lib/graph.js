@@ -37,4 +37,22 @@ export default class Graph {
     // we are just returning a copy of our array as a design choice so user cannot make changes directly to our internal representation of our graph
     return [...this.adjacencyList.get(node)];
   }
+
+  breadthFirstTraversal(callback) {
+    const queue = [this];
+    let n;
+
+    while (queue.length > 0) {
+      n = queue.shift();
+      callback(n.value);
+
+      if (!n.children) {
+        // continue;
+      }
+
+      for (let i = 0; i < n.children.length; i++) {
+        queue.push(n.children[i]);
+      }
+    }
+  }
 }
